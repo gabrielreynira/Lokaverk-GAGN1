@@ -182,15 +182,17 @@ values ("1","Listi1",'1991-01-01',"1"),
 	("34","Listi34",'1994-07-01',"7"),
 	("35","Listi35",'1995-07-01',"7");*/
     
+
+-- Uppgefnar fyrirspurnir --
+
 -- 1: Sýnið heiti og útgefanda allra laga tiltekins flytjanda (Bo Burnham).
-/* SELECT flytjandi_ID, heiti 
+/*SELECT flytjandi_ID, heiti, nafn
 FROM lag
+inner join utgefandi on lag.utgefandi_ID = utgefandi.utgefandi_ID
 WHERE flytjandi_ID = "000000003";*/
 
 -- 2: Sýnið nafn, heiti allra lagalista sem tiltekið lag er á (þið veljið lagið sjálf).
-/*select heiti, list_ID
-from notandalisti
-where heiti = "This is America";*/
+-- Gat ekki gert
 
 -- 3: Sýnið heiti og lengd allra laga sem tilheyra tegundinni „rapp“.
 /*SELECT heiti, lengd, tegund_ID
@@ -202,3 +204,77 @@ WHERE tegund_ID = 1*/
 FROM lag
 WHERE lengd >= 5.00
 ORDER BY lag.lengd*/
+
+-- 5: Sýnið vinsælasta lag útgáfunnar (þeas mest valið af notendum).
+-- Gat ekki gert
+
+-- 6: Sýnið nafn notanda, heiti á lagalista notanda, útgáfudag lagalistans.
+/*SELECT nafn, heiti, stofndagur
+FROM notandalisti
+INNER JOIN notandi
+ON notandi.notandi_ID = notandalisti.notandi_ID
+where notandi.notandi_Id = 5; */
+
+-- 7: Sýnið heiti og nafn flytjanda á fimm lengstu lögunum.
+/*SELECT nafn, heiti, lengd
+FROM lag
+INNER JOIN flytjandi
+ON lag.flytjandi_ID = flytjandi.flytjandi_ID
+order by lengd desc
+LIMIT 5;*/
+
+
+-- 8: Sýnið fjölda laga eftir tegund – birtið bara þær þrjár tegundir sem hafa flest lög.
+/*SELECT tegund.tegund_ID, tegund.nafn, COUNT(lag.tegund_ID) AS 'Lög'
+FROM lag
+INNER JOIN tegund
+where tegund.tegund_ID = lag.tegund_ID
+group by lag.tegund_ID
+ORDER by count(lag.tegund_ID) desc
+limit 3;*/
+
+
+-- 9: Sýnið nöfn allra notanda og fjölda lagalista sem þeir eiga.
+/*select nafn, count(notandalisti.notandi_ID) as 'Listar'
+FROM notandi
+INNER JOIN notandalisti
+where notandi.notandi_ID = notandalisti.notandi_ID
+group by notandalisti.notandi_ID*/
+
+-- 10: Sýnið hversu mörg lög byrja á bókstafnum A og hafa bókstafinn s í nafninu.
+/*SELECT heiti
+FROM lag
+WHERE heiti LIKE 'a%' AND heiti LIKE '%s%'*/
+
+-- 11: Sýndu heiti og útgefanda laga sem eru gefin út fyrir 2015
+/*SELECT lag.heiti, utgefandi.nafn, RIGHT(lag.utgafudagur,4)
+FROM lag
+JOIN utgefandi ON lag.utgefandi_ID=utgefandi.utgefandi_ID
+WHERE CONVERT(RIGHT(lag.utgafudagur, 4), UNSIGNED) < 2015-01-01*/
+
+-- 12: Sýndu meðallengd allra laganna.
+/*SELECT AVG(lengd)
+FROM lag*/
+
+-- 13: Sýnið nafn og lýsingu allra flytjenda sem eiga fleiri en 4 lög.
+/*SELECT nafn, lysing, COUNT(lag.flytjandi_ID) AS 'Fjöldi laga'
+FROM flytjandi
+INNER JOIN lag
+ON flytjandi.flytjandi_ID = lag.flytjandi_ID
+WHERE 'Fjöldi laga' > 4
+GROUP BY lag.flytjandi_ID;/*
+-- Athugið: Þetta returnar 0 row(s) þar sem enginn af mínum flytjendum eru með fleiri en 4 lög
+
+-- 14: Sýnið heiti allra flytjanda og fjölda laga sem hver og einn á
+/*SELECT nafn, COUNT(lag_ID)
+FROM lag
+JOIN flytjandi ON lag.flytjandi_ID=flytjandi.flytjandi_ID
+GROUP BY flytjandi.nafn*/
+
+-- Mínar Fyrirspurnir -- 
+
+/*15*/
+SELECT Flytjandi.nafn AS Nafn, tegund.nafn AS Tegund, lag.tegund_ID
+FROM lag
+INNER JOIN tegund ON lag.tegund_ID = tegund.tegund_ID
+INNER JOIN Flytjandi ON lag.flytjandi_ID = Flytjandi.flytjandi_ID
