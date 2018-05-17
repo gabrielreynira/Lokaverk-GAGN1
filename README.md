@@ -1,1 +1,1 @@
-Ef þú ert hérna að miðnætti til að yfirfara verkefnið er ég ekki alveg búinn með það. Ég vona innilega að ég fæ tækifæri til að klára verkefnið yfir nóttina og að þaf sé yfirfarið á morgun. Ef ekki er ég búinn að upploada öllu sem ég er búinn með hingaðtil.
+
