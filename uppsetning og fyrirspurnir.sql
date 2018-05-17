@@ -273,8 +273,3 @@ GROUP BY flytjandi.nafn*/
 
 -- Mínar Fyrirspurnir -- 
 
-/*15*/
-SELECT Flytjandi.nafn AS Nafn, tegund.nafn AS Tegund, lag.tegund_ID
-FROM lag
-INNER JOIN tegund ON lag.tegund_ID = tegund.tegund_ID
-INNER JOIN Flytjandi ON lag.flytjandi_ID = Flytjandi.flytjandi_ID
